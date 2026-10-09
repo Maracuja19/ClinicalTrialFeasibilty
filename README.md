@@ -1,4 +1,4 @@
-# Clinical Trial Site Feasibility & Intelligence
+# Clinical Trial Site Feasibility
 
 ## Business Question
 
