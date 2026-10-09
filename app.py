@@ -4,7 +4,20 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-#Page configuration
+from pathlib import Path
+
+# Load custom CSS
+css_path = Path(__file__).parent / "streamlit" / "style.css"
+
+if css_path.exists():
+    with open(css_path, encoding="utf-8") as css_file:
+        st.markdown(
+            f"<style>{css_file.read()}</style>",
+            unsafe_allow_html=True
+        )
+else:
+    st.warning(f"CSS file not found: {css_path}")
+
 st.set_page_config(
     page_title="Clinical Trial Feasibility",
     page_icon="",
@@ -50,11 +63,18 @@ filtered_df = df[
 total_sites = filtered_df["site_id"].nunique()
 median_recruitment = filtered_df["adjusted_recruitment"].median()
 median_activation = filtered_df.drop_duplicates("site_id")["activation_days"].median()
+low_risk_sites = (
+    filtered_df.loc[filtered_df["risk_level"] == "Low", "site_id"].nunique()
+)
+medium_risk_sites = (
+    filtered_df.loc[filtered_df["risk_level"] == "Medium", "site_id"].nunique()
+)
 high_risk_sites = (
     filtered_df.loc[filtered_df["risk_level"] == "High", "site_id"].nunique()
+
 )
 
-col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3, col4, col5, col6 = st.columns(6)
 col1.metric("Sites", total_sites)
 col2.metric(
 "Median estimated recruitment",
@@ -64,12 +84,14 @@ col3.metric(
 "Median activation time",
 f"{median_activation:.0f} days" if pd.notna(median_activation) else "N/A"
 )
-col4.metric("High-risk sites", high_risk_sites)
+col4.metric("Low-risk sites", low_risk_sites)
+col5.metric("Medium-risk sites", medium_risk_sites)
+col6.metric("High-risk sites", high_risk_sites)
 
 st.divider()
 
 #recruitment by site and indication
-st.subheader("Estimated Recruitment Potential by Site and Indication")
+st.subheader("Site-TA Ranking by Recruitment Potential")
 
 site_summary = (
     filtered_df[
@@ -81,6 +103,7 @@ site_summary = (
             "risk_level"
         ]
     ]
+    .loc[lambda x: x["risk_level"] != "High"]
     .sort_values(
         by="adjusted_recruitment",
         ascending=False
@@ -98,7 +121,7 @@ fig = px.bar(
         "adjusted_recruitment": "Estimated Recruitment (patients/month)",
         "risk_level": "Operational Risk"
     },
-    title="Top 15 Site-Indication Combinations by Estimated Recruitment"
+    #title="Site-TA Ranking by Recruitment Potential"
 )
 st.plotly_chart(fig, use_container_width=True)
 

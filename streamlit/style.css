@@ -1,0 +1,8 @@
+[data-testid="stSidebar"] {
+    outline: 5px solid rgb(55, 161, 222) !important;
+}
+
+
+[data-testid="stSidebar"] [data-tag] {
+    background-color: #1764d8 !important;
+}
