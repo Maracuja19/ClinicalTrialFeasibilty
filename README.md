@@ -1,4 +1,4 @@
-# Clinical Trial Site Feasibility
+# Clinical Trial Site Feasibility 
 
 ## Business Question
 
@@ -6,7 +6,7 @@ How can clinical trial sites be compared by recruitment potential and operationa
 
 ## Objective
 
-Create an interactive dashboard to assess site feasibility across countries and therapeutic indications, compare key metrics and identify promising site–indication combinations.
+Create an interactive dashboard to assess site feasibility across countries and therapeutic areas (TA), compare key metrics and identify promising site–TA combinations.
 
 ## Methods
 
@@ -18,4 +18,4 @@ The project focuses on site feasibility assessment rather than the full site ide
 
 ## Limitations/Disclaimer
 
-The data do not represent real clinical trial sites or outcomes. Recruitment estimates are illustrative rather than validated predictions, and risk weights and thresholds were not derived from real-world evidence. The dashboard is intended for demonstration and exploratory analysis, not for actual site selection or operational decision-making.
+The data do not represent real clinical trial sites or outcomes. Recruitment estimates are illustrative rather than validated predictions, and variables, risk weights and thresholds were not derived from real-world evidence. The dashboard is intended for demonstration and exploratory analysis, not for actual site selection or operational decision-making.
