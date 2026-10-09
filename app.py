@@ -24,7 +24,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("Clinical Trial Feasibility & Site Intelligence")
+st.title("Clinical Trial Feasibility")
 st.caption("Exploratory site assessment using synthetic data")
 
 
